@@ -40,5 +40,25 @@ int main()
 	delete wjane;
 
 	// Create a class that works with objects of the base class; this new class shall contain at least a method / operator to add items of base class type, to print and to modify the added items
+	
+	std::cout << "---------------------------------\n";
+	Person *johnny = new Person(23, "Johnny", "Doe");
+	Person *janey = new Person(23, "Janey", "Doe");
+	std::cout << "---------------------------------\n";
+	
 	std::cout << "CERINTA 3 \n";
+	City *Iasi = new City();
+	Iasi->SetName("Iasi");
+	
+	std::cout << "Method to add items:\n";
+	Iasi->AddPerson(*johnny);
+	Iasi->AddPerson(*janey);
+
+	delete johnny;
+	delete janey;
+
+	std::cout << "Print the added items:\n";
+	Iasi->print();
+
+	delete Iasi;
 }
