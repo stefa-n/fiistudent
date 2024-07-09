@@ -18,6 +18,8 @@ int main()
 	std::cout << "!= " << (john != jane) << "\n";
 
 	// TODO: Cerinta 2
+	std::cout << "CERINTA 2 \n";
 
 	// TODO: Cerinta 3
+	std::cout << "CERINTA 2 \n";
 }
