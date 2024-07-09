@@ -13,6 +13,7 @@ void GenerateCNP(int &variable)
 	variable = cnp;
 }
 
+// (De/con)structori
 Person::~Person()
 {
 	std::cout << "Deconstructorul pentru clasa \"Person\" a fost apelat (" << this->first_name << " " << this->last_name << ")\n";
@@ -26,7 +27,7 @@ Person::Person()
 	strcpy_s(this->first_name, "John");
 	strcpy_s(this->last_name, "Doe");
 
-	std::cout << " V: " << this->age << "; CNP: " << this->cnp << "; FN: " << this->first_name << "; LN: " << this->last_name << "\n";
+	this->print();
 }
 
 Person::Person(int age, const char first_name[40], const char last_name[40])
@@ -37,29 +38,43 @@ Person::Person(int age, const char first_name[40], const char last_name[40])
 	strcpy_s(this->first_name, first_name);
 	strcpy_s(this->last_name, last_name);
 
-	std::cout << " V: " << this->age << "; CNP: " << this->cnp << "; FN: " << this->first_name << "; LN: " << this->last_name << "\n";
+	this->print();
 }
 
-int Person::GetAge()
+Worker::~Worker()
 {
-	return this->age;
+	std::cout << "Deconstructorul pentru clasa \"Worker\" a fost apelat (" << this->first_name << " " << this->last_name << ")\n";
 }
 
-int Person::GetCNP()
+Worker::Worker()
 {
-	return this->cnp;
+	std::cout << "Constructorul pentru clasa \"Worker\" fara argumente a fost apelat: ";
+	this->age = rand() % 30;
+	GenerateCNP(this->cnp);
+	strcpy_s(this->first_name, "John");
+	strcpy_s(this->last_name, "Doe");
+
+	this->salary = 3000;
+	strcpy_s(this->job, "Constructor");
+
+	this->print();
 }
 
-char* Person::GetFirstName()
+Worker::Worker(int age, const char first_name[40], const char last_name[40], const char job[20], int salary)
 {
-	return this->first_name;
+	std::cout << "Constructorul pentru clasa \"Worker\" cu argumente a fost apelat: ";
+	this->age = age;
+	GenerateCNP(this->cnp);
+	strcpy_s(this->first_name, first_name);
+	strcpy_s(this->last_name, last_name);
+
+	this->salary = salary;
+	strcpy_s(this->job, job);
+
+	this->print();
 }
 
-char* Person::GetLastName()
-{
-	return this->last_name;
-}
-
+// Operatori
 bool Person::operator==(Person &pers)
 {
 	if (this->cnp == pers.cnp)
@@ -73,3 +88,4 @@ bool Person::operator!=(Person &pers)
 		return true;
 	return false;
 }
+
