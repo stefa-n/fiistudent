@@ -23,7 +23,7 @@ int main()
 	delete john;
 	delete jane;
 
-	// TODO: Derive 3 new classes which should extend the base class by adding at least 2 attributes ✅, 2 different methods ✅ and by re-implementing 1 method from the base class ✅
+	// Derive 3 new classes which should extend the base class by adding at least 2 attributes ✅, 2 different methods ✅ and by re-implementing 1 method from the base class ✅
 	
 	std::cout << "Constructori:\n";
 	Worker *wjohn = new Worker();
@@ -39,6 +39,6 @@ int main()
 	delete wjohn;
 	delete wjane;
 
-	// TODO: Cerinta 3
+	// Create a class that works with objects of the base class; this new class shall contain at least a method / operator to add items of base class type, to print and to modify the added items
 	std::cout << "CERINTA 3 \n";
 }
