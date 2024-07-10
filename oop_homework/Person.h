@@ -9,10 +9,43 @@ protected:
 	char first_name[40];
 	char last_name[40];
 
+	void GenerateCNP(int& variable)
+	{
+		int cnp = 0;
+		for (int i = 0; i <= 3; i++)
+		{
+			cnp += ((rand() % (8)) + 1); // seed-ul lui rand va fi mereu 1, deci daca se da restart la program va da aceleasi numere mereu
+			cnp *= 10;
+		}
+
+		variable = cnp;
+	}
+
 public:
-	~Person();
-	Person();
-	Person(int age, const char first_name[40], const char last_name[40]);
+	~Person()
+	{
+		std::cout << "Deconstructorul pentru clasa \"Person\" a fost apelat (" << this->first_name << " " << this->last_name << ")\n";
+	};
+	Person()
+	{
+		std::cout << "Constructorul pentru clasa \"Person\" fara argumente a fost apelat: ";
+		this->age = rand() % 30;
+		GenerateCNP(this->cnp);
+		strcpy_s(this->first_name, "John");
+		strcpy_s(this->last_name, "Doe");
+
+		this->print();
+	};
+	Person(int age, const char first_name[40], const char last_name[40])
+	{
+		std::cout << "Constructorul pentru clasa \"Person\" cu argumente a fost apelat: ";
+		this->age = age;
+		GenerateCNP(this->cnp);
+		strcpy_s(this->first_name, first_name);
+		strcpy_s(this->last_name, last_name);
+
+		this->print();
+	};
 
 	int GetCNP() { return this->cnp; };
 	int GetAge() { return this->age; };
@@ -25,8 +58,18 @@ public:
 		std::cout << this->first_name << " " << this->last_name << ": " << this->age << " " << this->cnp << "\n";
 	}
 
-	bool operator==(Person& pers);
-	bool operator!=(Person& pers);
+	bool operator==(Person& pers)
+	{
+		if (this->cnp == pers.cnp)
+			return true;
+		return false;
+	};
+	bool operator!=(Person& pers)
+	{
+		if (this->cnp != pers.cnp)
+			return true;
+		return false;
+	};
 };
 
 class Worker :
@@ -35,9 +78,36 @@ class Worker :
 	char job[20];
 	int salary;
 public:
-	~Worker();
-	Worker();
-	Worker(int age, const char first_name[40], const char last_name[40], const char job[20], int salary);
+	~Worker()
+	{
+		std::cout << "Deconstructorul pentru clasa \"Worker\" a fost apelat (" << this->first_name << " " << this->last_name << ")\n";
+	};
+	Worker()
+	{
+		std::cout << "Constructorul pentru clasa \"Worker\" fara argumente a fost apelat: ";
+		this->age = rand() % 30;
+		GenerateCNP(this->cnp);
+		strcpy_s(this->first_name, "John");
+		strcpy_s(this->last_name, "Doe");
+
+		this->salary = 3000;
+		strcpy_s(this->job, "Constructor");
+
+		this->print();
+	};
+	Worker(int age, const char first_name[40], const char last_name[40], const char job[20], int salary)
+	{
+		std::cout << "Constructorul pentru clasa \"Worker\" cu argumente a fost apelat: ";
+		this->age = age;
+		GenerateCNP(this->cnp);
+		strcpy_s(this->first_name, first_name);
+		strcpy_s(this->last_name, last_name);
+
+		this->salary = salary;
+		strcpy_s(this->job, job);
+
+		this->print();
+	};
 
 	char* GetJob() {
 		return this->job;

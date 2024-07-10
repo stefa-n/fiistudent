@@ -1,0 +1,75 @@
+Inductive Nat :=
+| Zero : Nat (* zero *)
+| Succ : Nat -> Nat (* succ *).
+
+Check Succ (Succ Zero).
+
+Fixpoint plus (m n : Nat) : Nat :=
+  match m with
+  | Zero    => n
+  | Succ m' => Succ(plus m' n)
+  end.
+
+Compute plus (Succ Zero)
+             (Succ Zero).
+
+Compute plus (Succ (Succ (Succ Zero)))
+             (Succ (Succ Zero)).
+
+Lemma zero_plus_n_is_n:
+  forall n,
+    plus Zero n = n.
+Proof.
+  (* limbaj de tactici *)
+  intro n'.
+  simpl.
+  reflexivity.
+Qed.
+
+Lemma plus_n_zero_is_n:
+  forall n,
+    plus n Zero = n.
+Proof.
+  induction n.
+  - simpl.
+    reflexivity.
+  - simpl.
+    rewrite IHn.
+    reflexivity.
+Qed.
+
+Theorem plus_comm:
+  forall m n,
+    plus m n = plus n m.
+Proof.
+  induction m.
+  - intros n.
+    rewrite plus_n_zero_is_n.
+    rewrite zero_plus_n_is_n.
+  reflexivity.
+  - induction n.
+    + simpl.
+      rewrite plus_n_zero_is_n.
+      reflexivity.
+    + simpl.
+      rewrite <- IHn.
+      simpl.
+      rewrite IHm.
+      simpl.
+      rewrite IHm.
+      reflexivity.
+Qed.
+
+Theorem plus_assoc:
+  forall m n p,
+    plus (plus m n) p = plus m (plus n p).
+Proof.
+  induction m.
+  - intros.
+    simpl.
+    reflexivity.
+  - intros.
+    simpl.
+    rewrite IHm.
+    reflexivity.
+Qed.  
